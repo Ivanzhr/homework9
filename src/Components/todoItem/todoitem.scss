@@ -1,0 +1,43 @@
+.todoItem {
+  display: flex;
+  border-bottom: 1px solid;
+  position: relative;
+
+    .name, .tags {
+        width: 15%;
+        padding: 15px;
+    }
+
+    .note {
+        width: 70%;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+    }
+
+    .name {
+        display: flex;
+        align-items: center;
+    }
+
+    .tags .tag {
+        display: inline-block;
+        margin: 5px;
+        text-decoration: underline;
+    }
+    
+    .tags .tag, svg:hover {
+        cursor: pointer;
+    }
+
+    svg {
+       position: absolute;
+       right: 15px;
+       top: 13px;
+       font-size: 30px;
+    }
+
+    .pen {
+        right: 50px;
+    }
+}
