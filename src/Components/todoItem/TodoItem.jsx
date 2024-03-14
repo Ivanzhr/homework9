@@ -1,46 +1,31 @@
-import { useRef, useState } from 'react';
+import { useRef} from 'react';
 import './todoitem.scss'
 import { MdDeleteOutline as Delete, MdOutlineEdit } from "react-icons/md";
-import { useDispatch } from 'react-redux';
+import { useContext } from 'react';
+import { contextValue } from '../../Context';
 
-function CreateItem({ name, note, teg }) {
 
-  const despatch = useDispatch()
+function CreateItem({id, name, note, teg, isselect }) {
+
 
   const refName = useRef(null)
   const refNote = useRef(null)
   const refTag = useRef(null)
 
-  function handlerSort(elem) {
+  const {handlerFilterByTeg, handlerAddNoteForEdit, handlerdel} = useContext(contextValue);
 
-    despatch({type: "SEARCH", payload: elem});
-  }
-
-  function handlerDel() {
-
-    const text = refName.current.textContent;
-
-    despatch({type: "REMOVE", payload: text});
-  }
-
-  function handlerEdit() {
-
-    const text = refName.current.textContent;
-
-    despatch({type: "EDIT", payload: text});
-  }
 
     return (
-      <div className="todoItem">
+      <div className="todoItem" style = {{display: !isselect ? 'flex': 'none'}} >
         <div className='name' ref={refName}>{name}</div>
         <div className='note' ref={refNote}>{note}</div>
         <div className='tags' ref={refTag}>
           {teg.map((elem, index) => (
-            <p key={index} className='tag' onClick={() => handlerSort(elem)}>{elem}</p>
+            <p key={index} className='tag' onClick ={() => handlerFilterByTeg(elem)}>{elem}</p>
           ))}
        </div>
-       <Delete onClick={handlerDel}/>
-       <MdOutlineEdit className='pen' onClick={handlerEdit}/>
+       <Delete onClick={() => handlerdel(id)}/>
+       <MdOutlineEdit className='pen' onClick = {()=> handlerAddNoteForEdit(id)}/>
       </div>
     );
   }

@@ -1,10 +1,10 @@
 import './todoList.scss'
 import Item from '../todoItem/TodoItem'
-import { useSelector } from 'react-redux'
+import { useContext } from 'react';
+import { contextValue } from '../../Context';
 
 function CreateTodoList() {
-
-    const todos = useSelector(todos => todos);
+    const {todos} = useContext(contextValue);
     console.log(todos)
     return (
         <div className="todoItems">
